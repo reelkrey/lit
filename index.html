@@ -13,6 +13,11 @@
     <my-element>
       <h1>Vite + Lit</h1>
     </my-element>
-    <custom-input></custom-input>
   </body>
+  <style>
+    my-element::part(button) {
+      background-color: red;
+      color: white;
+    }
+  </style>
 </html>

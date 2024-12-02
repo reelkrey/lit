@@ -4,22 +4,19 @@ import litLogo from "./assets/lit.svg";
 import viteLogo from "/vite.svg";
 
 /**
- * An example element.
+ * About this component
  *
- * @slot - This element has a slot
- * @csspart button - The button
+ * @slot  "This element has a slot"
+ * @csspart "You can change button styles from outside"
+ * @property {number} count "It's property for increace count of clicking"
+ * @property {string} docsHint "It's property for some information about Lit and Vite"
  */
+
 @customElement("my-element")
 export class MyElement extends LitElement {
-  /**
-   * Copy for the read the docs hint.
-   */
   @property()
   docsHint = "Click on the Vite and Lit logos to learn more";
 
-  /**
-   * The number of times the button has been clicked.
-   */
   @property({ type: Number })
   count = 0;
 
@@ -35,7 +32,7 @@ export class MyElement extends LitElement {
       </div>
       <slot></slot>
       <div class="card">
-        <button class="button__styles" @click=${this._onClick} part="button">
+        <button class="button__styles" @click=${this.onClick} part="button">
           count is ${this.count}
         </button>
       </div>
@@ -43,7 +40,7 @@ export class MyElement extends LitElement {
     `;
   }
 
-  private _onClick() {
+  private onClick() {
     this.count++;
   }
 
