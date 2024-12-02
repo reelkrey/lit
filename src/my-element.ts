@@ -4,7 +4,7 @@ import litLogo from "./assets/lit.svg";
 import viteLogo from "/vite.svg";
 
 /**
- * JSDoc
+ * Documentation
  * @slot  "This element has a slot"
  * @csspart "You can change button styles from outside"
  * @property {number} count "It's property for increace count of clicking"
