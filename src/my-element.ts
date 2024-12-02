@@ -9,6 +9,7 @@ import viteLogo from "/vite.svg";
  * @csspart "You can change button styles from outside"
  * @property {number} count "It's property for increace count of clicking"
  * @property {string} docsHint "It's property for some information about Lit and Vite"
+ * @property {string} word "Just use this property to type some words from outside"
  */
 
 @customElement("my-element")
@@ -18,6 +19,9 @@ export class MyElement extends LitElement {
 
   @property({ type: Number })
   count = 0;
+
+  @property()
+  word = "";
 
   render() {
     return html`
@@ -30,6 +34,7 @@ export class MyElement extends LitElement {
         </a>
       </div>
       <slot></slot>
+      <span>${this.word}</span>
       <div class="card">
         <button class="button__styles" @click=${this.onClick} part="button">
           count is ${this.count}
