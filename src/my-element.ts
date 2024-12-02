@@ -121,6 +121,11 @@ export class MyElement extends LitElement {
     .button__styles {
       background-color: #fff;
     }
+    span {
+      color: white;
+      background-color: red;
+      padding: 10px;
+    }
   `;
 }
 
