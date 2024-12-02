@@ -7,8 +7,8 @@ import viteLogo from "/vite.svg";
  * Documentation
  * @slot  "This element has a slot"
  * @csspart "You can change button styles from outside"
- * @property {number} count "It's property for increace count of clicking"
- * @property {string} docsHint "It's property for some information about Lit and Vite"
+ * @property {number} count "This property for increace count of clicking"
+ * @property {string} docsHint "This property for some information about Lit and Vite"
  * @property {string} word "Just use this property to type some words from outside"
  */
 
