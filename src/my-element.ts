@@ -23,7 +23,7 @@ export class MyElement extends LitElement {
   @property()
   word = "";
 
-  private increaseValue() {
+  private increaseCount() {
     this.count++;
   }
 
@@ -42,7 +42,7 @@ export class MyElement extends LitElement {
       <div class="card">
         <button
           class="button__styles"
-          @click=${this.increaseValue}
+          @click=${this.increaseCount}
           part="button"
         >
           count is ${this.count}
