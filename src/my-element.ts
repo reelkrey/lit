@@ -23,6 +23,10 @@ export class MyElement extends LitElement {
   @property()
   word = "";
 
+  private increaseValue() {
+    this.count++;
+  }
+
   render() {
     return html`
       <div>
@@ -36,16 +40,16 @@ export class MyElement extends LitElement {
       <slot></slot>
       ${this.word ? html`<span>${this.word}</span>` : ""}
       <div class="card">
-        <button class="button__styles" @click=${this.onClick} part="button">
+        <button
+          class="button__styles"
+          @click=${this.increaseValue}
+          part="button"
+        >
           count is ${this.count}
         </button>
       </div>
       <p class="read-the-docs">${this.docsHint}</p>
     `;
-  }
-
-  private onClick() {
-    this.count++;
   }
 
   static styles = css`
