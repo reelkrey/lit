@@ -1,7 +1,7 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 
-@customElement("to-do")
+@customElement("todo-app")
 export class Todo extends LitElement {
   render() {
     return html`
@@ -14,6 +14,6 @@ export class Todo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "to-do": Todo;
+    "todo-app": Todo;
   }
 }
