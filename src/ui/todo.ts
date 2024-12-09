@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators.js";
 import "./todo-list.ts";
 
 @customElement("todo-app")
-export class Todo extends LitElement {
+export class TodoApp extends LitElement {
   render() {
     return html`
       <div class="todo-app__inner">
@@ -24,6 +24,6 @@ export class Todo extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "todo-app": Todo;
+    "todo-app": TodoApp;
   }
 }
