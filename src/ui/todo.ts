@@ -1,5 +1,6 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import "./todo-list.ts";
 
 @customElement("todo-app")
 export class Todo extends LitElement {
@@ -7,6 +8,7 @@ export class Todo extends LitElement {
     return html`
       <div>
         <h1>Todo</h1>
+        <todo-list />
       </div>
     `;
   }
