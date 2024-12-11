@@ -18,7 +18,7 @@ export class TodoApp extends LitElement {
       title: event.detail.task,
     };
 
-    this.tasks.push = newTask;
+    this.tasks.push(newTask);
   }
 
   render() {
