@@ -1,11 +1,12 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { Task } from "./task.interface.ts";
 import "./todo-list.ts";
 import "./todo-create.ts";
 
 @customElement("todo-app")
 export class TodoApp extends LitElement {
-  @state() tasks: { id: number; title: string; completed: boolean }[] = [];
+  @state() tasks: Task[] = [];
 
   constructor() {
     super();
@@ -14,10 +15,10 @@ export class TodoApp extends LitElement {
 
   private addTask(event: CustomEvent) {
     const newTask = {
-      id: Date.now(),
       title: event.detail.task,
-      completed: false,
     };
+
+    this.tasks.push = newTask;
   }
 
   render() {
