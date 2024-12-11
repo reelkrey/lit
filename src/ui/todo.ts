@@ -1,11 +1,24 @@
 import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, state } from "lit/decorators.js";
 import "./todo-list.ts";
 import "./todo-create.ts";
 
 @customElement("todo-app")
 export class TodoApp extends LitElement {
-  @property() task = "";
+  @state() tasks: { id: number; title: string; completed: boolean }[] = [];
+
+  constructor() {
+    super();
+    this.addEventListener("task-created", this.addTask as EventListener);
+  }
+
+  private addTask(event: CustomEvent) {
+    const newTask = {
+      id: Date.now(),
+      title: event.detail.task,
+      completed: false,
+    };
+  }
 
   render() {
     return html`

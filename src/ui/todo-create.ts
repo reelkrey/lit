@@ -9,12 +9,26 @@ export class TodoCreate extends LitElement {
     this.task = (event.target as HTMLInputElement).value;
   }
 
-  createTask() {}
+  private createTask() {
+    const newTask = new CustomEvent("task-created", {
+      detail: { task: this.task },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(newTask);
+
+    this.task = "";
+  }
 
   render() {
     return html`
       <div class="todo-create">
-        <input @input=${this.handleInput} placeholder="create new task" />
+        <input
+          @input=${this.handleInput}
+          .value=${this.task}
+          placeholder="create new task"
+        />
         <button @click=${this.createTask}>create</button>
       </div>
     `;
