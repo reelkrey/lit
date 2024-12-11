@@ -1,10 +1,12 @@
 import { css, html, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import "./todo-list.ts";
 import "./todo-create.ts";
 
 @customElement("todo-app")
 export class TodoApp extends LitElement {
+  @property() task = "";
+
   render() {
     return html`
       <div class="todo-app">
