@@ -34,13 +34,27 @@ export class TodoItem extends LitElement {
   }
 
   static styles = css`
+    .todo-item button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .todo-item button:hover {
+      background-color: #0056b3;
+    }
+
     .todo-item {
       display: flex;
-      gap: 20px;
-      max-width: max-content;
-      padding: 10px 20px;
-      border: 1px solid #000;
-      border-radius: 10px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 15px;
+      margin: 5px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
     }
   `;
 }

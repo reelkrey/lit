@@ -13,7 +13,7 @@ export class TodoApp extends LitElement {
   private createTask(event: CustomEvent) {
     const newTask = {
       title: event.detail.title,
-      completed: event.detail.completed,
+      completed: false,
     };
 
     this.tasks = [...this.tasks, newTask];
