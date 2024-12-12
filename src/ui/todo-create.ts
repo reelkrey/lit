@@ -10,16 +10,15 @@ export class TodoCreate extends LitElement {
   }
 
   private createTask() {
+    if (!this.task.trim()) return;
+
     const newTask = new CustomEvent("task-created", {
       detail: { task: this.task },
       bubbles: true,
       composed: true,
     });
-
-
-
+    
     this.dispatchEvent(newTask);
-
     this.task = "";
   }
 
