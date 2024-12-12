@@ -13,11 +13,11 @@ export class TodoCreate extends LitElement {
   private createTask() {
     if (!this.title.trim()) return;
 
-    const newTask = new CustomEvent("task-created", {
+    const create = new CustomEvent("creat-task", {
       detail: { title: this.title, completed: false },
     });
 
-    this.dispatchEvent(newTask);
+    this.dispatchEvent(create);
     this.title = "";
   }
 
