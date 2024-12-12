@@ -34,7 +34,7 @@ export class TodoApp extends LitElement {
   render() {
     return html`
       <div class="todo-app">
-        <todo-create @creat-task=${this.createTask}></todo-create>
+        <todo-create @create-task=${this.createTask}></todo-create>
         <div class="todo-app__inner">
           <todo-list
             @toggle-task-status=${this.toggleTaskStatus}
