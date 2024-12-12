@@ -1,4 +1,3 @@
-// todo-app.ts
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { Task } from "./task.interface.ts";
@@ -13,13 +12,16 @@ export class TodoApp extends LitElement {
   constructor() {
     super();
     this.addEventListener("task-created", this.addTask as EventListener);
-    this.addEventListener("task-status-changed", this.updateTaskStatus as EventListener);
+    this.addEventListener(
+      "task-status-changed",
+      this.updateTaskStatus as EventListener,
+    );
   }
 
   private addTask(event: CustomEvent) {
     const newTask = {
-      title: event.detail.task,
-      completed: false
+      title: event.detail.title,
+      completed: false,
     };
 
     this.inProgressTasks = [...this.inProgressTasks, newTask];
@@ -29,16 +31,32 @@ export class TodoApp extends LitElement {
     const { title, completed } = event.detail;
 
     if (completed) {
-      const taskToMove = this.inProgressTasks.find(task => task.title === title);
+      const taskToMove = this.inProgressTasks.find(
+        (task) => task.title === title,
+      );
       if (taskToMove) {
-        this.inProgressTasks = this.inProgressTasks.filter(task => task.title !== title);
-        this.completedTasks = [...this.completedTasks, { ...taskToMove, completed: true }];
+        this.inProgressTasks = this.inProgressTasks.filter(
+          (task) => task.title !== title,
+        );
+        this.completedTasks = [
+          ...this.completedTasks,
+          { ...taskToMove, completed: true },
+        ];
       }
-    } else {
-      const taskToMove = this.completedTasks.find(task => task.title === title);
+    }
+
+    if (!completed) {
+      const taskToMove = this.completedTasks.find(
+        (task) => task.title === title,
+      );
       if (taskToMove) {
-        this.completedTasks = this.completedTasks.filter(task => task.title !== title);
-        this.inProgressTasks = [...this.inProgressTasks, { ...taskToMove, completed: false }];
+        this.completedTasks = this.completedTasks.filter(
+          (task) => task.title !== title,
+        );
+        this.inProgressTasks = [
+          ...this.inProgressTasks,
+          { ...taskToMove, completed: false },
+        ];
       }
     }
   }
@@ -48,8 +66,14 @@ export class TodoApp extends LitElement {
       <div class="todo-app">
         <todo-create></todo-create>
         <div class="todo-app__inner">
-          <todo-list title="in progress" .tasks=${this.inProgressTasks}></todo-list>
-          <todo-list title="completed" .tasks=${this.completedTasks}></todo-list>
+          <todo-list
+            title="in progress"
+            .tasks=${this.inProgressTasks}
+          ></todo-list>
+          <todo-list
+            title="completed"
+            .tasks=${this.completedTasks}
+          ></todo-list>
         </div>
       </div>
     `;

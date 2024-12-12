@@ -3,23 +3,23 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("todo-create")
 export class TodoCreate extends LitElement {
-  @property() task = "";
+  @property() title = "";
 
   private handleChange(event: InputEvent) {
-    this.task = (event.target as HTMLInputElement).value;
+    this.title = (event.target as HTMLInputElement).value;
   }
 
   private createTask() {
-    if (!this.task.trim()) return;
+    if (!this.title.trim()) return;
 
     const newTask = new CustomEvent("task-created", {
-      detail: { task: this.task },
+      detail: { title: this.title },
       bubbles: true,
       composed: true,
     });
-    
+
     this.dispatchEvent(newTask);
-    this.task = "";
+    this.title = "";
   }
 
   render() {
@@ -27,7 +27,7 @@ export class TodoCreate extends LitElement {
       <div class="todo-create">
         <input
           @input=${this.handleChange}
-          .value=${this.task}
+          .value=${this.title}
           placeholder="create new task"
         />
         <button @click=${this.createTask}>create</button>
