@@ -3,14 +3,13 @@ import { customElement, property } from "lit/decorators.js";
 
 @customElement("todo-item")
 export class TodoItem extends LitElement {
-  @property() text = "";
-  @property({ type: Boolean }) completed = false;
+  @property() title = "";
 
   render() {
     return html`
       <li class="todo-item">
         <input type="checkbox" />
-        <span>text</span>
+        <span>${this.title}</span>
         <button>edit</button>
         <button>delete</button>
       </li>
