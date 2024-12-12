@@ -5,7 +5,7 @@ import { customElement, property } from "lit/decorators.js";
 export class TodoCreate extends LitElement {
   @property() task = "";
 
-  private handleInput(event: InputEvent) {
+  private handleChange(event: InputEvent) {
     this.task = (event.target as HTMLInputElement).value;
   }
 
@@ -25,7 +25,7 @@ export class TodoCreate extends LitElement {
     return html`
       <div class="todo-create">
         <input
-          @input=${this.handleInput}
+          @input=${this.handleChange}
           .value=${this.task}
           placeholder="create new task"
         />
