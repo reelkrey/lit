@@ -34,6 +34,9 @@ export class TodoList extends LitElement {
     }
 
     .todo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       list-style: none;
       padding: 0;
     }
