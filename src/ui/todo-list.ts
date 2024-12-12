@@ -10,8 +10,8 @@ export class TodoList extends LitElement {
 
   render() {
     return html`
-      <div>
-        <span class="todo-list__span">${this.title}</span>
+      <div class="todo-list__wrapper">
+        <h1 class="todo-list__title">${this.title}</h1>
         <ul class="todo-list">
           ${this.tasks.map(
             (task) => html`<todo-item .title=${task.title}></todo-item>`,
@@ -22,14 +22,20 @@ export class TodoList extends LitElement {
   }
 
   static styles = css`
-    .todo-list {
-      padding: 0px;
-      list-style: none;
+    .todo-list__wrapper {
+      padding: 10px 30px;
+      border: 1px solid #0056b3;
+      border-radius: 8px;
     }
 
-    .todo-list__span {
+    .todo-list__title {
       font-size: 20px;
       font-weight: 900;
+    }
+
+    .todo-list {
+      list-style: none;
+      padding: 0;
     }
   `;
 }

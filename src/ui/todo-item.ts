@@ -52,7 +52,6 @@ export class TodoItem extends LitElement {
       gap: 10px;
       align-items: center;
       padding: 10px 15px;
-      margin: 5px;
       border: 1px solid #ddd;
       border-radius: 8px;
     }
