@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import "./todo-item.ts";
 import { Task } from "./task.interface.ts";
+import "./todo-item.ts";
 
 @customElement("todo-list")
 export class TodoList extends LitElement {
@@ -13,11 +13,8 @@ export class TodoList extends LitElement {
       <div>
         <span class="todo-list__span">${this.title}</span>
         <ul class="todo-list">
-          
-          
           ${this.tasks.map(
-            (task) =>
-              html`<todo-item .title=${task.title}></todo-item>` 
+            (task) => html`<todo-item .title=${task.title}></todo-item>`,
           )}
         </ul>
       </div>

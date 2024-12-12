@@ -9,19 +9,10 @@ export class TodoApp extends LitElement {
   @state() completedTasks: Task[] = [];
   @state() inProgressTasks: Task[] = [];
 
-  constructor() {
-    super();
-    this.addEventListener("task-created", this.addTask as EventListener);
-    this.addEventListener(
-      "task-status-changed",
-      this.updateTaskStatus as EventListener,
-    );
-  }
-
   private addTask(event: CustomEvent) {
     const newTask = {
       title: event.detail.title,
-      completed: false,
+      completed: event.detail.completed,
     };
 
     this.inProgressTasks = [...this.inProgressTasks, newTask];
@@ -64,13 +55,15 @@ export class TodoApp extends LitElement {
   render() {
     return html`
       <div class="todo-app">
-        <todo-create></todo-create>
+        <todo-create @task-created=${this.addTask}></todo-create>
         <div class="todo-app__inner">
           <todo-list
+            @task-status-changed=${this.updateTaskStatus}
             title="in progress"
             .tasks=${this.inProgressTasks}
           ></todo-list>
           <todo-list
+            @task-status-changed=${this.updateTaskStatus}
             title="completed"
             .tasks=${this.completedTasks}
           ></todo-list>

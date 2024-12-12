@@ -1,21 +1,24 @@
 import { html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
+type EventWithTarget<T extends HTMLElement, E extends Event> = E & {
+  target: T;
+  currentTarget: T;
+};
+
 @customElement("todo-create")
 export class TodoCreate extends LitElement {
   @property() title = "";
 
-  private handleChange(event: InputEvent) {
-    this.title = (event.target as HTMLInputElement).value;
+  private handleChange(event: EventWithTarget<HTMLInputElement, InputEvent>) {
+    this.title = event.target.value;
   }
 
   private createTask() {
     if (!this.title.trim()) return;
 
     const newTask = new CustomEvent("task-created", {
-      detail: { title: this.title },
-      bubbles: true,
-      composed: true,
+      detail: { title: this.title, completed: false },
     });
 
     this.dispatchEvent(newTask);

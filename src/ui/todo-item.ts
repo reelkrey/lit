@@ -1,12 +1,10 @@
-// todo-item.ts
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 @customElement("todo-item")
 export class TodoItem extends LitElement {
   @property() title = "";
-  @property({ type: Boolean }) completed = false; 
-
+  @property({ type: Boolean }) completed = false;
 
   private handleCheckChange(event: Event) {
     this.completed = (event.target as HTMLInputElement).checked;
@@ -22,7 +20,11 @@ export class TodoItem extends LitElement {
   render() {
     return html`
       <li class="todo-item">
-        <input type="checkbox" @change=${this.handleCheckChange} ?checked=${this.completed} />
+        <input
+          type="checkbox"
+          @change=${this.handleCheckChange}
+          ?checked=${this.completed}
+        />
         <span>${this.title}</span>
         <button>edit</button>
         <button>delete</button>
