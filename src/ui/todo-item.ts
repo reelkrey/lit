@@ -1,19 +1,23 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { EventWithTarget } from "./types.ts";
 
 @customElement("todo-item")
 export class TodoItem extends LitElement {
   @property() title = "";
   @property({ type: Boolean }) completed = false;
 
-  private handleCheckChange(event: Event) {
-    this.completed = (event.target as HTMLInputElement).checked;
+  private handleStatusChange(
+    event: EventWithTarget<HTMLInputElement, InputEvent>,
+  ) {
+    this.completed = event.target.checked;
 
     const changeEvent = new CustomEvent("task-status-changed", {
-      detail: { title: this.title, completed: this.completed },
+      detail: { completed: this.completed },
       bubbles: true,
       composed: true,
     });
+
     this.dispatchEvent(changeEvent);
   }
 
@@ -22,7 +26,7 @@ export class TodoItem extends LitElement {
       <li class="todo-item">
         <input
           type="checkbox"
-          @change=${this.handleCheckChange}
+          @change=${this.handleStatusChange}
           ?checked=${this.completed}
         />
         <span>${this.title}</span>
