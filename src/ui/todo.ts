@@ -7,73 +7,41 @@ import "./todo-create.ts";
 @customElement("todo-app")
 export class TodoApp extends LitElement {
   @state() tasks: Task[] = [];
-  @state() completedTasks: Task[] = [];
-  @state() inProgressTasks: Task[] = [];
 
   private createTask(event: CustomEvent) {
     const newTask = {
       title: event.detail.title,
-      completed: event.detail.completed,
+      completed: false,
     };
 
     this.tasks = [...this.tasks, newTask];
   }
 
-  private moveTaskTo(arrayType: string) {
-    if (arrayType === "completed") {
-    }
-    if (arrayType === "in progress") {
-    }
-  }
-
-  private updateTaskStatus(event: CustomEvent) {
+  private toggleTaskStatus(event: CustomEvent) {
     const { title, completed } = event.detail;
 
-    if (completed) {
-      const taskToMove = this.inProgressTasks.find(
-        (task) => task.title === title,
-      );
-      if (taskToMove) {
-        this.inProgressTasks = this.inProgressTasks.filter(
-          (task) => task.title !== title,
-        );
-        this.completedTasks = [
-          ...this.completedTasks,
-          { ...taskToMove, completed: true },
-        ];
-      }
-    }
-
-    if (!completed) {
-      const taskToMove = this.completedTasks.find(
-        (task) => task.title === title,
-      );
-      if (taskToMove) {
-        this.completedTasks = this.completedTasks.filter(
-          (task) => task.title !== title,
-        );
-        this.inProgressTasks = [
-          ...this.inProgressTasks,
-          { ...taskToMove, completed: false },
-        ];
-      }
-    }
+    this.tasks = this.tasks.map((task) =>
+      task.title === title ? { ...task, completed } : task,
+    );
   }
 
   render() {
+    const completedTasks = this.tasks.filter((task) => task.completed);
+    const inProgressTasks = this.tasks.filter((task) => !task.completed);
+
     return html`
       <div class="todo-app">
         <todo-create @task-created=${this.createTask}></todo-create>
         <div class="todo-app__inner">
           <todo-list
-            @task-status-changed=${this.updateTaskStatus}
+            @toggle-task-status=${this.toggleTaskStatus}
             title="in progress"
-            .tasks=${this.tasks}
+            .tasks=${inProgressTasks}
           ></todo-list>
           <todo-list
-            @task-status-changed=${this.updateTaskStatus}
+            @toggle-task-status=${this.toggleTaskStatus}
             title="completed"
-            .tasks=${this.tasks}
+            .tasks=${completedTasks}
           ></todo-list>
         </div>
       </div>
