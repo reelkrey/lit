@@ -1,10 +1,6 @@
 import { html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-
-type EventWithTarget<T extends HTMLElement, E extends Event> = E & {
-  target: T;
-  currentTarget: T;
-};
+import { EventWithTarget } from "./types";
 
 @customElement("todo-create")
 export class TodoCreate extends LitElement {

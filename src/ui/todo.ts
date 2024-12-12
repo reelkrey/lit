@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { Task } from "./task.interface.ts";
+import { Task } from "./interfaces.ts";
 import "./todo-list.ts";
 import "./todo-create.ts";
 
