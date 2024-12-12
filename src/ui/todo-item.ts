@@ -16,14 +16,16 @@ export class TodoItem extends LitElement {
     });
 
     this.dispatchEvent(toggle);
-
-    // ?checked=${this.completed}
   }
 
   render() {
     return html`
       <li class="todo-item">
-        <input type="checkbox" @change=${this.toggleTaskStatus} />
+        <input
+          type="checkbox"
+          @change=${this.toggleTaskStatus}
+          ?checked=${this.completed}
+        />
         <span>${this.title}</span>
         <button>edit</button>
         <button>delete</button>
