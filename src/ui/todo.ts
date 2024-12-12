@@ -27,18 +27,18 @@ export class TodoApp extends LitElement {
 
   private updateTaskStatus(event: CustomEvent) {
     const { title, completed } = event.detail;
-    
+
     if (completed) {
       const taskToMove = this.inProgressTasks.find(task => task.title === title);
       if (taskToMove) {
         this.inProgressTasks = this.inProgressTasks.filter(task => task.title !== title);
-        this.completedTasks = [...this.completedTasks, taskToMove];
+        this.completedTasks = [...this.completedTasks, { ...taskToMove, completed: true }];
       }
     } else {
       const taskToMove = this.completedTasks.find(task => task.title === title);
       if (taskToMove) {
         this.completedTasks = this.completedTasks.filter(task => task.title !== title);
-        this.inProgressTasks = [...this.inProgressTasks, taskToMove];
+        this.inProgressTasks = [...this.inProgressTasks, { ...taskToMove, completed: false }];
       }
     }
   }

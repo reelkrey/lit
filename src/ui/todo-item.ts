@@ -1,14 +1,16 @@
+// todo-item.ts
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 @customElement("todo-item")
 export class TodoItem extends LitElement {
   @property() title = "";
-  @property({type: Boolean}) completed = false;
+  @property({ type: Boolean }) completed = false; 
+
 
   private handleCheckChange(event: Event) {
     this.completed = (event.target as HTMLInputElement).checked;
-    
+
     const changeEvent = new CustomEvent("task-status-changed", {
       detail: { title: this.title, completed: this.completed },
       bubbles: true,
