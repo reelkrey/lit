@@ -10,7 +10,7 @@ export class TodoItem extends LitElement {
     this.completed = !this.completed;
 
     const toggle = new CustomEvent("toggle-task-status", {
-      detail: { completed: this.completed },
+      detail: { title: this.title, completed: this.completed },
       bubbles: true,
       composed: true,
     });
