@@ -16,6 +16,8 @@ export class TodoCreate extends LitElement {
       composed: true,
     });
 
+
+
     this.dispatchEvent(newTask);
 
     this.task = "";
