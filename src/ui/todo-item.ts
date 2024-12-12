@@ -9,7 +9,6 @@ export class TodoItem extends LitElement {
   private handleCheckChange(event: Event) {
     this.completed = (event.target as HTMLInputElement).checked;
     
-    // Создаем событие для родительского компонента
     const changeEvent = new CustomEvent("task-status-changed", {
       detail: { title: this.title, completed: this.completed },
       bubbles: true,
