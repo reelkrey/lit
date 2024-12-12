@@ -21,10 +21,8 @@ export class TodoApp extends LitElement {
   }
 
   private toggleTaskStatus(event: CustomEvent) {
-    const toggledTask = event.detail.title;
-
     this.tasks = this.tasks.map((task) =>
-      task.title === toggledTask
+      task.title === event.detail.title
         ? { ...task, completed: !task.completed }
         : task,
     );
