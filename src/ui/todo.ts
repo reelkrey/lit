@@ -26,7 +26,7 @@ export class TodoApp extends LitElement {
     this.tasks = [...this.tasks, newTask];
   }
 
-  private toggleTaskStatus(event: CustomEvent) {
+  private toggleStatus(event: CustomEvent) {
     this.tasks = this.tasks.map((task) =>
       task.taskId === event.detail.taskId
         ? { ...task, completed: !task.completed }
@@ -41,13 +41,13 @@ export class TodoApp extends LitElement {
         <div class="todo-app__inner">
           <todo-list
             class="todo-list"
-            @toggle-task-status=${this.toggleTaskStatus}
+            @toggle-task-status=${this.toggleStatus}
             title="in progress"
             .tasks=${this.incompleteTasks}
           ></todo-list>
           <todo-list
             class="todo-list"
-            @toggle-task-status=${this.toggleTaskStatus}
+            @toggle-task-status=${this.toggleStatus}
             title="completed"
             .tasks=${this.completedTasks}
           ></todo-list>
