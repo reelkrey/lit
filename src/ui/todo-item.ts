@@ -7,14 +7,14 @@ export class TodoItem extends LitElement {
   @property({ type: Boolean }) completed = false;
   @property({ type: Number }) taskId = 0;
 
-  private toggleTaskStatus() {
-    const toggleTaskStatus = new CustomEvent("change-task-status", {
+  private changeTaskStatus() {
+    const changeTaskStatus = new CustomEvent("change-task-status", {
       detail: { taskId: this.taskId },
       bubbles: true,
       composed: true,
     });
 
-    this.dispatchEvent(toggleTaskStatus);
+    this.dispatchEvent(changeTaskStatus);
   }
 
   private deleteTask() {
@@ -42,7 +42,7 @@ export class TodoItem extends LitElement {
       <li class="todo-item">
         <input
           type="checkbox"
-          @change=${this.toggleTaskStatus}
+          @change=${this.changeTaskStatus}
           ?checked=${this.completed}
         />
         <span>${this.title}</span>
