@@ -5,7 +5,6 @@ import { EventWithTarget } from "./types";
 @customElement("todo-item")
 export class TodoItem extends LitElement {
   @property() title = "";
-  @property() newTitle = "";
   @property({ type: Boolean }) completed = false;
   @property({ type: Number }) taskId = 0;
   @property({ type: Boolean }) isEditing = false;
@@ -44,7 +43,7 @@ export class TodoItem extends LitElement {
     this.isEditing = false;
 
     const editTask = new CustomEvent("edit-task", {
-      detail: { taskId: this.taskId },
+      detail: { taskId: this.taskId, title: this.title },
       bubbles: true,
       composed: true,
     });

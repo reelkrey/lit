@@ -40,6 +40,14 @@ export class TodoApp extends LitElement {
     );
   }
 
+  private editTask(event: CustomEvent) {
+    this.tasks = this.tasks.map((task) =>
+      task.taskId === event.detail.taskId
+        ? { ...task, title: event.detail.title }
+        : task,
+    );
+  }
+
   render() {
     return html`
       <div class="todo-app">
@@ -51,6 +59,7 @@ export class TodoApp extends LitElement {
             .tasks=${this.inProgressTasks}
             @delete-task=${this.deleteTask}
             @change-task-status=${this.changeTaskStatus}
+            @edit-task=${this.editTask}
           ></todo-list>
           <todo-list
             class="todo-list"
