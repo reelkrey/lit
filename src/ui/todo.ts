@@ -8,7 +8,7 @@ import "./todo-create.ts";
 export class TodoApp extends LitElement {
   @state() tasks: Task[] = [];
 
-  private get incompleteTasks(): Task[] {
+  private get inProgressTasks(): Task[] {
     return this.tasks.filter((task) => !task.completed);
   }
 
@@ -43,7 +43,7 @@ export class TodoApp extends LitElement {
             class="todo-list"
             @toggle-task-status=${this.toggleStatus}
             title="in progress"
-            .tasks=${this.incompleteTasks}
+            .tasks=${this.inProgressTasks}
           ></todo-list>
           <todo-list
             class="todo-list"
