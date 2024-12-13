@@ -7,8 +7,6 @@ import "./todo-create.ts";
 @customElement("todo-app")
 export class TodoApp extends LitElement {
   @state() tasks: Task[] = [];
-  @state() inProgressTasks: Task[] = [];
-  @state() completedTasks: Task[] = [];
 
   private createTask(event: CustomEvent) {
     const newTask = {
@@ -18,18 +16,21 @@ export class TodoApp extends LitElement {
     };
 
     this.tasks = [...this.tasks, newTask];
-    this.inProgressTasks = [...this.inProgressTasks, newTask];
   }
 
   private toggleTaskStatus(event: CustomEvent) {
+    const { taskId } = event.detail;
     this.tasks = this.tasks.map((task) =>
-      task.title === event.detail.title
-        ? { ...task, completed: !task.completed }
-        : task,
+      task.taskId === taskId ? { ...task, completed: !task.completed } : task,
     );
+  }
 
-    this.inProgressTasks = this.tasks.filter((task) => !task.completed);
-    this.completedTasks = this.tasks.filter((task) => task.completed);
+  private get incompleteTasks(): Task[] {
+    return this.tasks.filter((task) => !task.completed);
+  }
+
+  private get completedTasks(): Task[] {
+    return this.tasks.filter((task) => task.completed);
   }
 
   render() {
@@ -41,7 +42,7 @@ export class TodoApp extends LitElement {
             class="todo-list"
             @toggle-task-status=${this.toggleTaskStatus}
             title="in progress"
-            .tasks=${this.inProgressTasks}
+            .tasks=${this.incompleteTasks}
           ></todo-list>
           <todo-list
             class="todo-list"
