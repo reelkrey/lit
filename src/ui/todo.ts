@@ -47,17 +47,17 @@ export class TodoApp extends LitElement {
         <div class="todo-app__inner">
           <todo-list
             class="todo-list"
-            @change-task-status=${this.changeTaskStatus}
             title="in progress"
             .tasks=${this.inProgressTasks}
             @delete-task=${this.deleteTask}
+            @change-task-status=${this.changeTaskStatus}
           ></todo-list>
           <todo-list
             class="todo-list"
-            @change-task-status=${this.changeTaskStatus}
             title="completed"
             .tasks=${this.completedTasks}
             @delete-task=${this.deleteTask}
+            @change-task-status=${this.changeTaskStatus}
           ></todo-list>
         </div>
       </div>
