@@ -8,15 +8,23 @@ export class TodoItem extends LitElement {
   @property({ type: Number }) taskId = 0;
 
   private toggleTaskStatus() {
-    this.completed = !this.completed;
-
-    const toggle = new CustomEvent("toggle-task-status", {
+    const toggleStatus = new CustomEvent("toggle-task-status", {
       detail: { taskId: this.taskId },
       bubbles: true,
       composed: true,
     });
 
-    this.dispatchEvent(toggle);
+    this.dispatchEvent(toggleStatus);
+  }
+
+  private deleteTask() {
+    const deleteTask = new CustomEvent("delete-task", {
+      detail: { taskId: this.taskId },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(deleteTask);
   }
 
   render() {
@@ -29,7 +37,7 @@ export class TodoItem extends LitElement {
         />
         <span>${this.title}</span>
         <button>edit</button>
-        <button>delete</button>
+        <button @click=${this.deleteTask}>delete</button>
       </li>
     `;
   }
