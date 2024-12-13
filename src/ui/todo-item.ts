@@ -8,13 +8,13 @@ export class TodoItem extends LitElement {
   @property({ type: Number }) taskId = 0;
 
   private toggleTaskStatus() {
-    const toggleStatus = new CustomEvent("change-task-status", {
+    const toggleTaskStatus = new CustomEvent("change-task-status", {
       detail: { taskId: this.taskId },
       bubbles: true,
       composed: true,
     });
 
-    this.dispatchEvent(toggleStatus);
+    this.dispatchEvent(toggleTaskStatus);
   }
 
   private deleteTask() {
@@ -27,6 +27,16 @@ export class TodoItem extends LitElement {
     this.dispatchEvent(deleteTask);
   }
 
+  private editTask() {
+    const editTask = new CustomEvent("edit-task", {
+      detail: { taskId: this.taskId },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(editTask);
+  }
+
   render() {
     return html`
       <li class="todo-item">
@@ -36,7 +46,7 @@ export class TodoItem extends LitElement {
           ?checked=${this.completed}
         />
         <span>${this.title}</span>
-        <button>edit</button>
+        <button @click=${this.editTask}>edit</button>
         <button @click=${this.deleteTask}>delete</button>
       </li>
     `;
