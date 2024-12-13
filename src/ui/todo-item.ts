@@ -5,12 +5,13 @@ import { customElement, property } from "lit/decorators.js";
 export class TodoItem extends LitElement {
   @property() title = "";
   @property({ type: Boolean }) completed = false;
+  @property({ type: Number }) taskId = 0;
 
   private toggleTaskStatus() {
     this.completed = !this.completed;
 
     const toggle = new CustomEvent("toggle-task-status", {
-      detail: { title: this.title, completed: this.completed },
+      detail: { title: this.taskId },
       bubbles: true,
       composed: true,
     });

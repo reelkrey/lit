@@ -14,7 +14,12 @@ export class TodoList extends LitElement {
         <h1 class="todo-list__title">${this.title}</h1>
         <ul class="todo-list">
           ${this.tasks.map(
-            (task) => html`<todo-item .title=${task.title}></todo-item>`,
+            (task) =>
+              html`<todo-item
+                .title=${task.title}
+                .completed=${task.completed}
+                .taskId=${task.taskId}
+              ></todo-item>`,
           )}
         </ul>
       </div>
