@@ -8,7 +8,7 @@ export class TodoItem extends LitElement {
   @property({ type: Number }) taskId = 0;
 
   private toggleTaskStatus() {
-    const toggleStatus = new CustomEvent("toggle-task-status", {
+    const toggleStatus = new CustomEvent("change-task-status", {
       detail: { taskId: this.taskId },
       bubbles: true,
       composed: true,
