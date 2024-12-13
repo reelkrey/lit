@@ -8,6 +8,14 @@ import "./todo-create.ts";
 export class TodoApp extends LitElement {
   @state() tasks: Task[] = [];
 
+  private get incompleteTasks(): Task[] {
+    return this.tasks.filter((task) => !task.completed);
+  }
+
+  private get completedTasks(): Task[] {
+    return this.tasks.filter((task) => task.completed);
+  }
+
   private createTask(event: CustomEvent) {
     const newTask = {
       taskId: Date.now(),
@@ -19,18 +27,11 @@ export class TodoApp extends LitElement {
   }
 
   private toggleTaskStatus(event: CustomEvent) {
-    const { taskId } = event.detail;
     this.tasks = this.tasks.map((task) =>
-      task.taskId === taskId ? { ...task, completed: !task.completed } : task,
+      task.taskId === event.detail.taskId
+        ? { ...task, completed: !task.completed }
+        : task,
     );
-  }
-
-  private get incompleteTasks(): Task[] {
-    return this.tasks.filter((task) => !task.completed);
-  }
-
-  private get completedTasks(): Task[] {
-    return this.tasks.filter((task) => task.completed);
   }
 
   render() {
