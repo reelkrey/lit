@@ -67,6 +67,7 @@ export class TodoApp extends LitElement {
             .tasks=${this.completedTasks}
             @delete-task=${this.deleteTask}
             @change-task-status=${this.changeTaskStatus}
+            @edit-task=${this.editTask}
           ></todo-list>
         </div>
       </div>
