@@ -69,7 +69,12 @@ export class TodoItem extends LitElement {
                 @change=${this.handleTitleEditing}
                 placeholder="edit task title"
               />
-              <button @click=${this.saveTitleEditing}>edit</button>
+              <button
+                class="todo-item__edit-inner__button"
+                @click=${this.saveTitleEditing}
+              >
+                edit
+              </button>
             </div>`
           : null}
       </li>
@@ -110,6 +115,10 @@ export class TodoItem extends LitElement {
       display: flex;
       justify-content: space-between;
       background-color: #007bff;
+    }
+
+    .todo-item__edit-inner__button {
+      width: 100%;
     }
   `;
 }
