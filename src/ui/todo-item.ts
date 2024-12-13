@@ -39,7 +39,7 @@ export class TodoItem extends LitElement {
     this.title = event.target.value;
   }
 
-  private saveTitleEditing() {
+  private finishTitleEditing() {
     this.isEditing = false;
 
     const editTask = new CustomEvent("edit-task", {
@@ -70,7 +70,7 @@ export class TodoItem extends LitElement {
               />
               <button
                 class="todo-item__edit-inner__button"
-                @click=${this.saveTitleEditing}
+                @click=${this.finishTitleEditing}
               >
                 edit
               </button>
