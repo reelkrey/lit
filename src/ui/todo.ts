@@ -32,18 +32,18 @@ export class TodoApp extends LitElement {
     );
   }
 
-  private changeTaskStatus(event: CustomEvent) {
-    this.tasks = this.tasks.map((task) =>
-      task.taskId === event.detail.taskId
-        ? { ...task, completed: !task.completed }
-        : task,
-    );
-  }
-
   private editTask(event: CustomEvent) {
     this.tasks = this.tasks.map((task) =>
       task.taskId === event.detail.taskId
         ? { ...task, title: event.detail.title }
+        : task,
+    );
+  }
+
+  private changeTaskStatus(event: CustomEvent) {
+    this.tasks = this.tasks.map((task) =>
+      task.taskId === event.detail.taskId
+        ? { ...task, completed: !task.completed }
         : task,
     );
   }
