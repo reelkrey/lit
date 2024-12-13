@@ -30,26 +30,26 @@ export class TodoItem extends LitElement {
     this.dispatchEvent(deleteTask);
   }
 
-  private handleTitleChange(
+  private startTitleEditing() {
+    this.isEditing = true;
+  }
+
+  private handleTitleEditing(
     event: EventWithTarget<HTMLInputElement, InputEvent>,
   ) {
     this.title = event.target.value;
   }
 
-  private saveTitleChanges() {
+  private saveTitleEditing() {
     this.isEditing = false;
-  }
 
-  private editTask() {
-    this.isEditing = true;
+    const editTask = new CustomEvent("edit-task", {
+      detail: { taskId: this.taskId },
+      bubbles: true,
+      composed: true,
+    });
 
-    // const editTask = new CustomEvent("edit-task", {
-    //   detail: { taskId: this.taskId },
-    //   bubbles: true,
-    //   composed: true,
-    // });
-
-    // this.dispatchEvent(editTask);
+    this.dispatchEvent(editTask);
   }
 
   render() {
@@ -61,15 +61,15 @@ export class TodoItem extends LitElement {
           ?checked=${this.completed}
         />
         <span>${this.title}</span>
-        <button @click=${this.editTask}>edit</button>
+        <button @click=${this.startTitleEditing}>edit</button>
         <button @click=${this.deleteTask}>delete</button>
         ${this.isEditing
           ? html` <div class="todo-item__edit-inner">
               <input
-                @change=${this.handleTitleChange}
+                @change=${this.handleTitleEditing}
                 placeholder="edit task title"
               />
-              <button @click=${this.saveTitleChanges}>edit</button>
+              <button @click=${this.saveTitleEditing}>edit</button>
             </div>`
           : null}
       </li>
