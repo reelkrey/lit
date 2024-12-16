@@ -40,14 +40,14 @@ export class MyLifecycle extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     console.log("connectedCallback: Компонент добавлен в DOM.");
-    this.startTimer(); // Пример действия при добавлении
+    this.startTimer();
   }
 
   // Отключение компонента из DOM
   disconnectedCallback(): void {
     super.disconnectedCallback();
     console.log("disconnectedCallback: Компонент удалён из DOM.");
-    this.stopTimer(); // Очищаем ресурсы
+    this.stopTimer();
   }
 
   // Вызывается перед обновлением и рендерингом
@@ -61,21 +61,8 @@ export class MyLifecycle extends LitElement {
     console.log("willUpdate: Готовимся к рендерингу.", changedProperties);
     if (changedProperties.has("counter") && this.counter > 10) {
       console.log("willUpdate: Счётчик больше 10. Перезапуск.");
-      this.counter = 0; // Пример реакции на изменения
+      this.counter = 0;
     }
-  }
-
-  // Генерация DOM
-  protected render() {
-    console.log("render: Рендеринг шаблона.");
-    return html`
-      <div>
-        <h2>Жизненный цикл Lit</h2>
-        <p>Счётчик: ${this.counter}</p>
-        <button @click="${this.incrementCounter}">Увеличить счётчик</button>
-        <button @click="${this.resetCounter}">Сбросить счётчик</button>
-      </div>
-    `;
   }
 
   // Действия после первого рендеринга
@@ -90,5 +77,18 @@ export class MyLifecycle extends LitElement {
     if (changedProperties.has("counter")) {
       console.log(`updated: Значение счётчика изменилось на ${this.counter}.`);
     }
+  }
+
+  // Генерация DOM
+  protected render() {
+    console.log("render: Рендеринг шаблона.");
+    return html`
+      <div>
+        <h2>Жизненный цикл Lit</h2>
+        <p>Счётчик: ${this.counter}</p>
+        <button @click="${this.incrementCounter}">Увеличить счётчик</button>
+        <button @click="${this.resetCounter}">Сбросить счётчик</button>
+      </div>
+    `;
   }
 }
