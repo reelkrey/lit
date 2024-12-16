@@ -1,30 +1,42 @@
-import { LitElement, html, css, PropertyValues } from "lit";
+import { LitElement, html, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 @customElement("my-lifecycle")
 export class MyLifecycle extends LitElement {
-  // Объявляем свойства
   @property({ type: Number }) counter = 0;
   @state() initialized = false;
 
-  // Стили компонента
-  static styles = css`
-    :host {
-      display: block;
-      padding: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
-    }
-  `;
+  private startTimer(): void {
+    console.log("startTimer: Таймер запущен.");
+  }
+
+  private stopTimer(): void {
+    console.log("stopTimer: Таймер остановлен.");
+  }
+
+  private incrementCounter(): void {
+    this.counter += 1;
+  }
+
+  private resetCounter(): void {
+    this.counter = 0;
+  }
 
   // Конструктор: инициализация свойств
+  // Создание начального состояния полей
+  // Инициализация переменных и установка значений по умолчанию.
+  // DOM-дерево компонента ещё не создано.
+  // Атрибуты и свойства, переданные в компонент, ещё не проинициализированы.
   constructor() {
     super();
     console.log("constructor: Компонент создан, свойства инициализированы.");
   }
 
   // Подключение компонента к DOM
+  // Навешивание слушателей событий.
+  // Пока что не выполнен рендеринг шаблона
+  // Можно навешивать глобальные слушатели
+  // Можно взаимодействовать с родительским элементом компонента
   connectedCallback(): void {
     super.connectedCallback();
     console.log("connectedCallback: Компонент добавлен в DOM.");
@@ -78,24 +90,5 @@ export class MyLifecycle extends LitElement {
     if (changedProperties.has("counter")) {
       console.log(`updated: Значение счётчика изменилось на ${this.counter}.`);
     }
-  }
-
-  // Методы для управления состоянием
-  private startTimer(): void {
-    console.log("startTimer: Таймер запущен.");
-    // Здесь можно реализовать таймер или другие процессы
-  }
-
-  private stopTimer(): void {
-    console.log("stopTimer: Таймер остановлен.");
-    // Здесь очищаем ресурсы
-  }
-
-  private incrementCounter(): void {
-    this.counter += 1;
-  }
-
-  private resetCounter(): void {
-    this.counter = 0;
   }
 }
