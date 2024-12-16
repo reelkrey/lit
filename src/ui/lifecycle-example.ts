@@ -1,9 +1,10 @@
-import { html, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
+import { html, LitElement, PropertyValues } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("lifecycle-example")
 export class LifecycleExample extends LitElement {
   text: string;
+  @property({ type: Number }) count = 0;
 
   /* 
   Шаг первый. 
@@ -29,6 +30,16 @@ export class LifecycleExample extends LitElement {
 
   /*
   Шаг третий
+  Вызывается перед тем, как компонент будет обновлен
+  */
+  willUpdate(changedProperties: PropertyValues) {
+    if (changedProperties.has("count")) {
+      console.log("count has been updated:", this.count);
+    }
+  }
+
+  /*
+  Шаг чертвертый
   Компонен TodoApp уже есть в DOM.
   Он уже отрендерился, элементы этого компонента доступны для работы (например button)
   Можно подписаться на события элементов: например делать что-то при нажатии на кнопку
