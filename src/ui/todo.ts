@@ -6,20 +6,6 @@ import "./todo-create.ts";
 
 @customElement("todo-app")
 export class TodoApp extends LitElement {
-  text: string;
-
-  constructor() {
-    super();
-    this.text = "Constructor lifecycle";
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    console.log(
-      `ConnectedCallback: Component has been added to the DOM after ${this.text}`,
-    );
-  }
-
   @state() tasks: Task[] = [];
 
   private get inProgressTasks(): Task[] {
