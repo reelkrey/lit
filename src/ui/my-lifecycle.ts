@@ -37,26 +37,27 @@ export class MyLifecycle extends LitElement {
   // Пока что не выполнен рендеринг шаблона
   // Можно навешивать глобальные слушатели
   // Можно взаимодействовать с родительским элементом компонента
+  // Элементы внутри компонента ещё не существуют и любые попытки их найти вернут null.
   connectedCallback(): void {
     super.connectedCallback();
     console.log("connectedCallback: Компонент добавлен в DOM.");
     this.startTimer();
   }
 
-  // Отключение компонента из DOM
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    console.log("disconnectedCallback: Компонент удалён из DOM.");
-    this.stopTimer();
-  }
-
   // Вызывается перед обновлением и рендерингом
+  // Изменённые свойства доступны через объект changedProperties
+  // Можно запускать подготовку к рендерингу.
+  // DOM ещё не обновлён и недоступен для манипуляций.
   protected update(changedProperties: PropertyValues): void {
     console.log("update: Обновление перед рендерингом.", changedProperties);
     super.update(changedProperties);
   }
 
   // Дополнительная подготовка перед рендерингом
+  // Полный доступ к текущему состоянию компонентов.
+  // Подготовка данных для шаблона.
+  // Проверка, какие свойства изменились.
+  // DOM ещё не обновлён
   protected willUpdate(changedProperties: PropertyValues): void {
     console.log("willUpdate: Готовимся к рендерингу.", changedProperties);
     if (changedProperties.has("counter") && this.counter > 10) {
@@ -65,21 +66,9 @@ export class MyLifecycle extends LitElement {
     }
   }
 
-  // Действия после первого рендеринга
-  protected firstUpdated(changedProperties: PropertyValues): void {
-    console.log("firstUpdated: Первый рендеринг завершён.", changedProperties);
-    this.initialized = true;
-  }
-
-  // Действия после каждого обновления
-  protected updated(changedProperties: PropertyValues): void {
-    console.log("updated: Рендеринг завершён.", changedProperties);
-    if (changedProperties.has("counter")) {
-      console.log(`updated: Значение счётчика изменилось на ${this.counter}.`);
-    }
-  }
-
   // Генерация DOM
+  // Рендеринг шаблона с использованием данных.
+  // Использование директив (repeat, ifDefined, classMap и т.д.).
   protected render() {
     console.log("render: Рендеринг шаблона.");
     return html`
@@ -90,5 +79,35 @@ export class MyLifecycle extends LitElement {
         <button @click="${this.resetCounter}">Сбросить счётчик</button>
       </div>
     `;
+  }
+
+  // Действия после первого рендеринга
+  // Полный доступ к готовому DOM.
+  // Манипуляции с элементами (например, this.shadowRoot.querySelector).
+  // Инициализация сложных UI-компонентов (например, подключение библиотек).
+  // Этот метод вызывается только один раз, поэтому для последующих обновлений он не используется!!!
+  protected firstUpdated(changedProperties: PropertyValues): void {
+    console.log("firstUpdated: Первый рендеринг завершён.", changedProperties);
+    this.initialized = true;
+  }
+
+  // Действия после каждого обновления
+  // Полный доступ к обновлённому DOM.
+  // Работа с обновившимися данными.
+  protected updated(changedProperties: PropertyValues): void {
+    console.log("updated: Рендеринг завершён.", changedProperties);
+    if (changedProperties.has("counter")) {
+      console.log(`updated: Значение счётчика изменилось на ${this.counter}.`);
+    }
+  }
+
+  // Отключение компонента из DOM
+  // Отписка от событий.
+  // Очистка ресурсов (например, таймеров, подписок).
+  // 	Элемент уже не находится в DOM.
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    console.log("disconnectedCallback: Компонент удалён из DOM.");
+    this.stopTimer();
   }
 }
