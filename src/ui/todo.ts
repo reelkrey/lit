@@ -3,7 +3,6 @@ import { customElement, state } from "lit/decorators.js";
 import { Task } from "./interfaces.ts";
 import "./todo-list.ts";
 import "./todo-create.ts";
-import "../ui/lifecycle-example-2.ts";
 
 @customElement("todo-app")
 export class TodoApp extends LitElement {
@@ -52,7 +51,6 @@ export class TodoApp extends LitElement {
   render() {
     return html`
       <div class="todo-app">
-        <lifecycle-example-2></lifecycle-example-2>
         <todo-create @create-task=${this.createTask}></todo-create>
         <div class="todo-app__inner">
           <todo-list

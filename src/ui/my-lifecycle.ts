@@ -1,8 +1,8 @@
 import { LitElement, html, css, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
-@customElement("my-lifecycle-demo")
-export class MyLifecycleDemo extends LitElement {
+@customElement("my-lifecycle")
+export class MyLifecycle extends LitElement {
   // Объявляем свойства
   @property({ type: Number }) counter = 0;
   @state() initialized = false;
