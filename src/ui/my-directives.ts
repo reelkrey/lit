@@ -34,6 +34,9 @@ export class MyDirectives extends LitElement {
     return html`
       <div>
         <h2>
+          <!-- 
+            Директива when используется для условного рендера с поддержкой разных ветвей (если/иначе). Это альтернатива стандартным тернарным операторам.
+            -->
           ${when(
             this.isLoggedIn,
             () => "Welcome Back!",
