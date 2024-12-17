@@ -41,13 +41,23 @@ export class MyDirectives extends LitElement {
           )}
         </h2>
 
-        <!-- Использование ifDefined -->
+        <!-- 
+        ifDefined используется для управления атрибутами. Она
+        позволяет устанавливать атрибут только в том случае, если значение
+        определено. Если значение undefined или null, атрибут будет удален из
+        DOM. 
+        -->
         <input
           placeholder="Optional Attribute"
           value=${ifDefined(this.optionalAttribute)}
         />
 
-        <!-- Использование repeat -->
+        <!--
+        repeat используется для эффективной генерации списка
+        элементов, особенно при работе с массивами. Она позволяет управлять
+        обновлением элементов на основе уникальных ключей, что делает обновления
+        DOM оптимизированными. 
+        -->
         <ul>
           ${repeat(
             this.items,
@@ -56,7 +66,11 @@ export class MyDirectives extends LitElement {
           )}
         </ul>
 
-        <!-- Использование guard -->
+        <!-- 
+        guard предотвращает ненужные повторные рендеры. Он позволяет
+        вычислять значение только в случае изменения заданного зависимого
+        значения.
+        -->
         <div>
           ${guard([this.items], () => {
             console.log("Guard executed");
@@ -64,7 +78,11 @@ export class MyDirectives extends LitElement {
           })}
         </div>
 
-        <!-- Кнопка с использованием ref -->
+        <!-- 
+        ref и createRef — это инструменты для получения доступа к элементам DOM в шаблонах Lit. Вместо поиска элемента в DOM через querySelector или getElementById, вы можете использовать ref.
+	•	createRef: Создает ссылку.
+	•	ref: Привязывает ссылку к элементу в шаблоне. 
+        -->
         <button ${ref(this.buttonRef)} @click=${this.handleClick}>
           ${this.isLoggedIn ? "Log Out" : "Log In"}
         </button>
@@ -72,7 +90,6 @@ export class MyDirectives extends LitElement {
     `;
   }
 
-  // Стили компонента
   static styles = css`
     :host {
       display: block;
